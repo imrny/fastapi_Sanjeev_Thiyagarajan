@@ -1,0 +1,22 @@
+from pydantic import BaseModel
+from typing import Optional
+
+class ItemBase(BaseModel):
+    title: str
+    content: str
+    published: bool
+
+class ItemCreate(ItemBase):
+    pass
+
+class ItemUpdate(ItemBase):
+    # Use Optional for partial updates (PATCH method). 
+    # For a PUT request, which typically replaces the entire resource, 
+    # the fields are generally required, but optional in the schema 
+    # for flexibility if needed.
+    pass
+
+class ItemInDB(ItemBase):
+    id: int
+    class Config:
+        orm_mode = True

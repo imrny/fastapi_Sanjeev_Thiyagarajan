@@ -1,0 +1,15 @@
+from jose import JWTError, jwt
+from datetime import datetime, timedelta
+
+
+SECRET_KEY = "8a9bu40o28p76p3203tns0lhnb1083uy410lnh28jeiodjh3u20a;cmuel9762kdjhsjhh"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    expire = datetime.now() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, ALGORITHM)
+    return encoded_jwt
+
